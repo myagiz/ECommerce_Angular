@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let item of getAllProductModel">
+    <div class="card" style="width: 18rem;">
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <small class="badge bg-success">{{item.categoryName}}</small>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Fiyat: {{item.unitPrice}} TL</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Satın Al</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
