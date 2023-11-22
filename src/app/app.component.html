@@ -9,26 +9,24 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Anasayfa</a>
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ürünler</a>
+            <a class="nav-link" href="#">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Siparişler</a>
+            <a class="nav-link disabled">Orders</a>
           </li>
         </ul>
         <form class="d-flex" >
-          <button class="btn btn-sm text-success" type="submit"><strong>Giriş Yap</strong></button>
-          <button class="btn mr-2 btn-sm text-danger" type="submit"><strong>Kayıt Ol</strong></button>
+          <!-- <button routerLink="/login" class="btn btn-sm text-success" type="submit"><strong>Login</strong></button> -->
+          <button routerLink="/register" class="btn mr-2 btn-sm text-danger" type="submit"><strong>Register</strong></button>
         </form>
       </div>
     </div>
   </nav>
-  <div class="container mt-4">
-    <app-products></app-products>
-  </div>
 </div>
 
-
-<router-outlet></router-outlet>
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
