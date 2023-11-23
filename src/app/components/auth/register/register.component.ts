@@ -12,10 +12,11 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup
   isCompleted = true;
+  isSuccessCompletedRegister = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService:AuthService,
+    private authService: AuthService,
     // private toastrService:ToastrService
   ) { }
 
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
         .then((data) => {
           this.isCompleted = true;
           this.registerForm.reset();
+          this.isSuccessCompletedRegister = true;
           // this.toastrService.success(
           //   "Added successfully!",
           //   "E-Commerce"

@@ -19,8 +19,9 @@
           </li>
         </ul>
         <form class="d-flex" >
-          <!-- <button routerLink="/login" class="btn btn-sm text-success" type="submit"><strong>Login</strong></button> -->
-          <button routerLink="/register" class="btn mr-2 btn-sm text-danger" type="submit"><strong>Register</strong></button>
+          <button *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-success" type="submit"><strong>Login</strong></button>
+          <button *ngIf="!isAuthenticated" routerLink="/register" class="btn btn-outline mr-2 btn-sm" type="submit"><strong>Register</strong></button>
+          <button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-danger mr-2 btn-sm" type="button"><strong>Logout</strong></button>
         </form>
       </div>
     </div>
