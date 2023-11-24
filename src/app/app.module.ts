@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './core/helpers/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { GeneralComponent } from './components/management/general/general.component';
+import { ProductComponent } from './components/management/product/product.component';
+import { UserComponent } from './components/management/user/user.component';
+import { OrderComponent } from './components/management/order/order.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -20,7 +24,11 @@ export function tokenGetter() {
     AppComponent,
     ProductsComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    GeneralComponent,
+    ProductComponent,
+    UserComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
-      positionClass: "toast-top-right"
+      positionClass: "toast-bottom-right"
     }),
     JwtModule.forRoot({
       config: {
