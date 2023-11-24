@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
             this.isCompleted = true;
             this.loginForm.reset();
             this.router.navigate(['/']);
+            window.location.reload();
             if (this.returnUrl == null || this.returnUrl == '/') {
               this.router.navigate(['/']);
 

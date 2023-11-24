@@ -15,6 +15,7 @@ import { GeneralComponent } from './components/management/general/general.compon
 import { ProductComponent } from './components/management/product/product.component';
 import { UserComponent } from './components/management/user/user.component';
 import { OrderComponent } from './components/management/order/order.component';
+import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -28,7 +29,8 @@ export function tokenGetter() {
     GeneralComponent,
     ProductComponent,
     UserComponent,
-    OrderComponent
+    OrderComponent,
+    MainDashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -11,8 +11,7 @@ declare const $: any;
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, AfterViewInit {
-  @ViewChild('dTable', { static: false }) dataTable: any
+export class ProductComponent implements OnInit {
   getAllProductModel: GetAllProductModel[] = []
   createFormVisible: any = false
   updateFormVisible: any = false
@@ -27,10 +26,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
   ) { }
 
-  ngAfterViewInit(): void {
-    $(this.dataTable.nativeElement).DataTable();
-
-  }
   ngOnInit(): void {
     this.getAllProducts()
     this.createProductForm();
@@ -79,6 +74,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
   getAllProducts() {
     this.productService.getAllCustomers().subscribe(response => {
       this.getAllProductModel = response.data
+      setTimeout(()=>{                          
+        $('#productDataTable').DataTable( {
+          pagingType: 'full_numbers',
+          pageLength: 10,
+          processing: true,
+          lengthMenu : [5, 10, 25],
+          order:[[1,"desc"]]
+      } );
+      }, 1);
     }, error => {
       this.getAllProductModel = []
     })

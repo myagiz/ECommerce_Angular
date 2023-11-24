@@ -10,12 +10,14 @@ import { UserComponent } from './components/management/user/user.component';
 import { OrderComponent } from './components/management/order/order.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { StandartGuard } from './core/guards/standart.guard';
+import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 
 // canActivate: [LoginGuard]
 const routes: Routes = [
-  { path: '', component: ProductsComponent ,canActivate: [StandartGuard] },
+  { path: '', component: MainDashboardComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'products', component: ProductsComponent},
   { path: 'management', component: GeneralComponent, canActivate: [AdminGuard] },
   { path: 'user-management', component: UserComponent, canActivate: [AdminGuard] },
   { path: 'product-management', component: ProductComponent, canActivate: [AdminGuard] },

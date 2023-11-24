@@ -1,36 +1,39 @@
-
-<div class="container">
-  <nav class="navbar navbar-expand-lg bg-light mt-4" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
-    <div class="container-fluid">
-      <!-- <a class="navbar-brand" href="#">E-Ticaret</a> -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active">Orders</a>
-          </li>
-          <li class="nav-item" *ngIf="isAuthenticated">
-            <a routerLink="/management" class="nav-link active">Management</a>
-          </li>
-        </ul>
-        <form class="d-flex" >
-          <button *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-success" type="submit"><strong>Login</strong></button>
-          <button *ngIf="!isAuthenticated" routerLink="/register" class="btn btn-outline mr-2 btn-sm" type="submit"><strong>Register</strong></button>
-          <button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-danger mr-2 btn-sm" type="button"><strong>Logout</strong></button>
-        </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0 py-3">
+  <div class="container-xl">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <!-- <img src="https://preview.webpixels.io/web/img/logos/clever-light.svg" class="h-8" alt="..."> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav mx-lg-auto">
+        <a class="nav-item nav-link active" href="/" aria-current="page">Home</a>
+        <a class="nav-item nav-link" routerLink="products">Products</a>
+        <a class="nav-item nav-link" *ngIf="isAuthenticated" routerLink="orders">Orders</a>
+      </div>
+      <div class="navbar-nav ms-lg-4">
+        <a *ngIf="!isAuthenticated" routerLink="/login" class="nav-item nav-link" href="#">Sign in</a>
+        <a *ngIf="isAuthenticated && isAdmin" routerLink="/management" class="btn btn-sm btn-success w-full w-lg-auto"
+          style="margin-right: 5px;">Management</a>
+      </div>
+      <!-- Action -->
+      <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
+        <a *ngIf="!isAuthenticated" routerLink="/register" class="btn btn-sm btn-primary w-full w-lg-auto">
+          Register
+        </a>
+        <a *ngIf="isAuthenticated" (click)="logout()" class="btn btn-sm btn-danger w-full w-lg-auto">
+          Logout
+        </a>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
 
-<div class="container mt-4">
-  <router-outlet></router-outlet>
+<div class="p-10">
+  <div class="mb-8 text-center">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/services/auth/auth.service';
+import { SessionService } from './core/services/session/session.service';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +10,30 @@ import { AuthService } from './core/services/auth/auth.service';
 export class AppComponent {
   title = 'ecommerceAngular';
   isAuthenticated: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       this.isAuthenticated = true
+      const claimRoles = this.sessionService.getRoles()
+      if (claimRoles == 'Admin') {
+        this.isAdmin = true;
+      }
     }
-    else{
+    else {
       this.isAuthenticated = false
     }
   }
 
-  logout(){
+  logout() {
     this.authService.logout()
     this.isAuthenticated = false
+    window.location.reload();
+
   }
 }
