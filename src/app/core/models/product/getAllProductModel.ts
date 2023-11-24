@@ -4,6 +4,6 @@ export interface GetAllProductModel{
     categoryName:string;
     name:string;
     unitPrice:number;
-    amounth:number;
+    amount:number;
     createDate:Date;
 }

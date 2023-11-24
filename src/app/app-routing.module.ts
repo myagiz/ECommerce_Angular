@@ -8,15 +8,18 @@ import { GeneralComponent } from './components/management/general/general.compon
 import { ProductComponent } from './components/management/product/product.component';
 import { UserComponent } from './components/management/user/user.component';
 import { OrderComponent } from './components/management/order/order.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { StandartGuard } from './core/guards/standart.guard';
+
 // canActivate: [LoginGuard]
 const routes: Routes = [
-  { path: '', component: ProductsComponent },
+  { path: '', component: ProductsComponent ,canActivate: [StandartGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'management', component: GeneralComponent },
-  { path: 'user-management', component: UserComponent },
-  { path: 'product-management', component: ProductComponent },
-  { path: 'order-management', component: OrderComponent },
+  { path: 'management', component: GeneralComponent, canActivate: [AdminGuard] },
+  { path: 'user-management', component: UserComponent, canActivate: [AdminGuard] },
+  { path: 'product-management', component: ProductComponent, canActivate: [AdminGuard] },
+  { path: 'order-management', component: OrderComponent, canActivate: [AdminGuard] },
 
 ];
 

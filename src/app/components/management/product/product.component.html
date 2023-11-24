@@ -5,17 +5,45 @@
                 <div class="row">
                     <div class="d-sm-flex">
                         <div class="flex-grow-1">
-                            <div style="font-size: 12px" class="mb-4 mt-4">Product management</div>
+                            <div style="font-size: 12px" class="mb-4 mt-4"><strong>PRODUCT MANAGEMENT</strong></div>
                         </div>
                         <div class="flex-shrink-0">
-                            <div style="font-size: 12px" class="mb-4 mt-4 text-info" onclick="history.back()" type="button"><i
-                                    class="fa-solid fa-rotate-left"></i> Back
-                            </div>
+                            <span style="font-size: 12px;margin-right: 10px;" class="mb-4 mt-4 btn btn-success" onclick="history.back()" type="button"><i
+                                    class="fa-solid fa-plus"></i>&nbsp;<strong>Create</strong>
+                            </span>
+                            <span style="font-size: 12px" class="mb-4 mt-4 text-info" onclick="history.back()" type="button"><i
+                                    class="fa-solid fa-rotate-left"></i>&nbsp;<strong>Back</strong>
+                            </span>
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-
+                    <div class="col-md-12 mt-4">
+                        <table id="example" #dTable class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of getAllProductModel">
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.categoryName}}</td>
+                                    <td>{{item.unitPrice}}</td>
+                                    <td>{{item.amount}}</td>
+                                </tr>                             
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
