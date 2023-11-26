@@ -15,10 +15,9 @@
                     </div>
 
                     <div class="col-md-12 mt-4">
-                        <table id="orderDataTable" class="table table-striped" style="width:100%;text-align: left;">
+                        <table id="ownedOrderDataTable" class="table table-striped" style="width:100%;text-align: left;">
                             <thead>
                                 <tr>
-                                    <th>User</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
                                     <th>Total Price</th>
@@ -27,13 +26,12 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of getAllOrderModel">
-                                    <td>{{item.createUserName}}</td>
                                     <td>{{item.orderDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                                     <td>{{item.orderStatusName}}</td>
                                     <td>{{item.totalPrice | number :'.1'}}</td>
                                     <td>
-                                        <i type="button" class="fa-solid fa-magnifying-glass text-success"></i>
-                                    </td>
+                                        <i type="button"  class="fa-solid fa-magnifying-glass text-success"></i>
+                                    </td>                         
                                 </tr>
                             </tbody>
                             <tfoot>

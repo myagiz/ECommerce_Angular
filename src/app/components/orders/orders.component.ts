@@ -4,27 +4,26 @@ import { OrderService } from 'src/app/core/services/order/order.service';
 declare const $: any;
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   getAllOrderModel:GetAllOrderModel[]=[]
-
   constructor(
     private orderService:OrderService
   ) { }
 
   ngOnInit(): void {
-    this.getAllOrder();
+    this.getAllOwnedOrder()
   }
 
-  getAllOrder(){
-    this.orderService.getAllOrder().subscribe(response=>{
+  getAllOwnedOrder(){
+    this.orderService.getAllOwnedOrder().subscribe(response=>{
       console.log(response.data)
       this.getAllOrderModel = response.data
       setTimeout(()=>{                          
-        $('#orderDataTable').DataTable( {
+        $('#ownedOrderDataTable').DataTable( {
           pagingType: 'full_numbers',
           pageLength: 10,
           processing: true,
@@ -34,4 +33,5 @@ export class OrderComponent implements OnInit {
       }, 1);
     })
   }
+
 }
