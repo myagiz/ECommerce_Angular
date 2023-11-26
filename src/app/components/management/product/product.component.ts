@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit {
   createProductForm() {
     this.createProductFormGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(255)]],
-      categoryId: ['', [Validators.required]],
+      // categoryId: ['', [Validators.required]],
       unitPrice: ['', [Validators.required]],
       amount: ['', [Validators.required]],
     });
@@ -65,7 +65,7 @@ export class ProductComponent implements OnInit {
     this.updateProductFormGroup = this.formBuilder.group({
       id: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.maxLength(255)]],
-      categoryId: ['', [Validators.required]],
+      // categoryId: ['', [Validators.required]],
       unitPrice: ['', [Validators.required]],
       amount: ['', [Validators.required]],
     });

@@ -75,10 +75,10 @@ export class LoginComponent implements OnInit {
         })
         .catch((error) => {
           this.isCompleted = true;
-          // this.toastrService.error(
-          //   "Error",
-          //   "E-Commerce"
-          // )
+          this.toastrService.error(
+            "Check pass or email.",
+            "E-Commerce"
+          )
         })
         .finally(() => {
 

@@ -14,6 +14,7 @@ export interface OrderDetails {
     productName: string
     productUnitPrice: number
     amount: number
+    productPrice: number
     productTotalPrice: number
 
 }

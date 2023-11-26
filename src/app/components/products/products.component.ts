@@ -5,6 +5,7 @@ import { OrderService } from 'src/app/core/services/order/order.service';
 import { ToastrService } from 'ngx-toastr';
 import { CreateOrderModel, ProductListForOrder } from 'src/app/core/models/order/createOrderModel';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ export class ProductsComponent implements OnInit {
   getAllProductModel: GetAllProductModel[] = []
   cartItems: any[] = [];
   isCompleted = true;
+  isAuthenticated: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -22,10 +24,17 @@ export class ProductsComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.getAllProducts()
+    if (this.authService.isAuthenticated()) {
+      this.isAuthenticated = true
+    }
+    else {
+      this.isAuthenticated = false
+    }
   }
 
   viewProduct(item: any): void {
@@ -38,11 +47,11 @@ export class ProductsComponent implements OnInit {
       productId: cartItem.id,
       amount: cartItem.quantity
     }));
-  
+
     const orderModel: CreateOrderModel = {
       productList: productList
     };
-  
+
     this.orderService
       .createOrder(orderModel)
       .toPromise()
@@ -79,7 +88,8 @@ export class ProductsComponent implements OnInit {
         name: item.name,
         quantity: 1,
         unitPrice: item.unitPrice,
-        totalPrice: item.unitPrice
+        totalPrice: item.unitPrice,
+        stock: item.stock
       };
       this.cartItems.push(newItem);
     }

@@ -15,7 +15,8 @@
                     </div>
 
                     <div class="col-md-12 mt-4">
-                        <table id="ownedOrderDataTable" class="table table-striped" style="width:100%;text-align: left;">
+                        <table id="ownedOrderDataTable" class="table table-striped"
+                            style="width:100%;text-align: left;">
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
@@ -27,11 +28,22 @@
                             <tbody>
                                 <tr *ngFor="let item of getAllOrderModel">
                                     <td>{{item.orderDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                    <td>{{item.orderStatusName}}</td>
-                                    <td>{{item.totalPrice | number :'.1'}}</td>
+                                    <td *ngIf="item.orderStatusName=='Waiting'"><i
+                                            class="fa-solid fa-spinner fa-spin-pulse" style="color: #d99a12;"></i>
+                                        {{item.orderStatusName}}</td>
+                                    <td *ngIf="item.orderStatusName=='Completed'"><i class="fa-solid fa-circle-check"
+                                            style="color: #1ba136;"></i> {{item.orderStatusName}}</td>
+                                    <td *ngIf="item.orderStatusName=='Canceled'"><i class="fa-regular fa-circle-xmark"
+                                            style="color: #d1294b;"></i> {{item.orderStatusName}}</td>
+                                    <td><strong>{{item.totalPrice | number :'.1'}}</strong></td>
                                     <td>
-                                        <i type="button"  class="fa-solid fa-magnifying-glass text-success"></i>
-                                    </td>                         
+                                        <i data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            (click)="this.getOrderDetail(item.id)" type="button"
+                                            class="fa-solid fa-magnifying-glass text-success"
+                                            style="margin-right: 5px;"></i>
+                                        <i (click)="changeOrderStatus(item.id,4)" type="button"
+                                            class="fa-regular fa-rectangle-xmark text-danger"></i>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -45,6 +57,55 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="text-align: left;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">Order Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="badge bg-light text-danger">Order Date</span>
+                        <br />
+                        <strong>{{ orderDetail?.orderDate | date:'dd-MM-yyyy HH:mm:ss'}}</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge bg-light text-danger">Status</span>
+                        <br />
+                        <strong>{{ orderDetail?.orderStatusName }}</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge bg-light text-danger">Products</span>
+                        <ul>
+                            <li *ngFor="let product of orderDetail?.productList">
+                                <strong>{{ product.productName }}</strong>
+                                <br />
+                                <span class="text-success">{{ product.productPrice | number :'.1' }} * {{ product.amount
+                                    }} = {{
+                                    product.productTotalPrice | number :'.1' }} TL</span>
+
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge bg-light text-danger">Total</span>
+                        <br />
+                        <strong> {{ orderDetail?.totalPrice | number :'.1'}} TL</strong>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

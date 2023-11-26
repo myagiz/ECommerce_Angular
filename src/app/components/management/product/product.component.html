@@ -17,18 +17,18 @@
                     <div class="col-md-12">
                         <form [formGroup]="createProductFormGroup">
                             <div class="row">
-                                <div class="col-6 form-group">
+                                <div class="col-12 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="text" formControlName="name" class="form-control"
                                             placeholder="Product Name">
                                     </div>
                                 </div>
-                                <div class="col-6 form-group">
+                                <!-- <div class="col-6 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="text" formControlName="categoryId" class="form-control"
                                             placeholder="Category">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-6 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="number" formControlName="amount" class="form-control"
@@ -91,18 +91,18 @@
                         <form [formGroup]="updateProductFormGroup">
                             <div class="row">
                                 <input type="text" hidden="hidden" formControlName="id" class="form-control">
-                                <div class="col-6 form-group">
+                                <div class="col-12 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="text" formControlName="name" class="form-control"
                                             placeholder="Product Name">
                                     </div>
                                 </div>
-                                <div class="col-6 form-group">
+                                <!-- <div class="col-6 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="text" formControlName="categoryId" class="form-control"
                                             placeholder="Category">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-6 form-group">
                                     <div class="col-12 mt-2">
                                         <input type="number" formControlName="amount" class="form-control"
@@ -170,7 +170,7 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Category</th>
+                                    <!-- <th>Category</th> -->
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th></th>
@@ -179,9 +179,24 @@
                             <tbody>
                                 <tr *ngFor="let item of getAllProductModel">
                                     <td>{{item.name}}</td>
-                                    <td>{{item.categoryName}}</td>
-                                    <td>{{item.unitPrice | number :'.1'}}</td>
-                                    <td>{{item.amount}}</td>
+                                    <!-- <td>{{item.categoryName}}</td> -->
+                                    <td>{{item.unitPrice | number :'.1'}} TL</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar"
+                                                [style.width]="item.amount + '%'" [attr.aria-valuenow]="item.amount"
+                                                aria-valuemin="0" aria-valuemax="100" [ngClass]="{
+                                              'bg-danger': item.amount >= 0 && item.amount <= 25,
+                                              'bg-warning': item.amount > 25 && item.amount <= 50,
+                                              'bg-info': item.amount > 50 && item.amount <= 75,
+                                              'bg-success': item.amount > 75
+                                            }">
+                                            </div>
+                                        </div>
+                                        {{ item.amount }} Stock
+                                    </td>
+
+
                                     <td>
                                         <span type="button" (click)="this.openUpdateForm(item.id)"
                                             style="margin-right: 5px;"><i
@@ -194,7 +209,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Category</th>
+                                    <!-- <th>Category</th> -->
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th></th>
