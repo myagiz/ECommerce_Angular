@@ -3,14 +3,15 @@ import { ToastrService } from 'ngx-toastr';
 import { GetAllOrderModel } from 'src/app/core/models/order/getAllOrderModel';
 import { OrderService } from 'src/app/core/services/order/order.service';
 import Swal from 'sweetalert2';
+
 declare const $: any;
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   getAllOrderModel: GetAllOrderModel[] = []
   orderDetail: GetAllOrderModel | null = null;
 
@@ -20,15 +21,14 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllOrder();
+    this.getAllOwnedOrder()
   }
 
-  getAllOrder() {
-    this.orderService.getAllOrder().subscribe(response => {
-      console.log(response.data)
+  getAllOwnedOrder() {
+    this.orderService.getAllOwnedOrder().subscribe(response => {
       this.getAllOrderModel = response.data
       setTimeout(() => {
-        $('#orderDataTable').DataTable({
+        $('#ownedOrderDataTable').DataTable({
           pagingType: 'full_numbers',
           pageLength: 10,
           processing: true,
@@ -69,7 +69,7 @@ export class OrderComponent implements OnInit {
                 timerProgressBar: true
 
               });
-              this.getAllOrder();
+              this.getAllOwnedOrder();
             })
             .catch((error) => {
               this.toastrService.error(
@@ -106,7 +106,7 @@ export class OrderComponent implements OnInit {
                 timerProgressBar: true
 
               });
-              this.getAllOrder();
+              this.getAllOwnedOrder();
             })
             .catch((error) => {
               this.toastrService.error(
@@ -123,4 +123,5 @@ export class OrderComponent implements OnInit {
 
 
   }
+
 }

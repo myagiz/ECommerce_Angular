@@ -15,10 +15,10 @@
                     </div>
 
                     <div class="col-md-12 mt-4">
-                        <table id="orderDataTable" class="table table-striped" style="width:100%;text-align: left;">
+                        <table id="ownedOrderDataTable" class="table table-striped"
+                            style="width:100%;text-align: left;">
                             <thead>
                                 <tr>
-                                    <th>User</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
                                     <th>Total Price</th>
@@ -27,7 +27,6 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of getAllOrderModel">
-                                    <td>{{item.createUserName}}</td>
                                     <td>{{item.orderDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                                     <td *ngIf="item.orderStatusName=='Waiting'"><i
                                             class="fa-solid fa-spinner fa-spin-pulse" style="color: #d99a12;"></i>
@@ -41,9 +40,6 @@
                                         <i data-bs-toggle="modal" data-bs-target="#exampleModal"
                                             (click)="this.getOrderDetail(item.id)" type="button"
                                             class="fa-solid fa-magnifying-glass text-success"
-                                            style="margin-right: 5px;"></i>
-                                        <i (click)="this.changeOrderStatus(item.id,3)" type="button"
-                                            class="fa-solid fa-solid fa-check text-success"
                                             style="margin-right: 5px;"></i>
                                         <i (click)="changeOrderStatus(item.id,4)" type="button"
                                             class="fa-regular fa-rectangle-xmark text-danger"></i>

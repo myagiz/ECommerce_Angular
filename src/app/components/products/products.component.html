@@ -1,19 +1,70 @@
-<div class="row">
-  <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let item of getAllProductModel">
-    <div class="card mb-4"[style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
-      <!-- <img src="..." class="card-img-top" alt="..."> -->
-      <div class="card-body">
-        <h5 class="card-title">{{item.name}}</h5>
-        <small class="badge bg-success">{{item.categoryName}}</small>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Fiyat: {{item.unitPrice}} TL</li>
-      </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">Satın Al</a>
+<div class="row" *ngIf="getAllProductModel.length">
+  <div class="card col-sm-9 col-md-9 col-lg-9">
+    <div class="row">
+      <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let item of getAllProductModel">
+        <div class="card mb-2" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
+          <div class="card-body" style="padding:20px">
+            <!-- <img src="https://productimages.hepsiburada.net/s/237/550/110000220869754.jpg/format:webp"> -->
+            <i class="fa-brands fa-product-hunt fa-2xl" style="color: #000000;margin-bottom: 50px;"></i>
+            <h5 class="card-title">{{ truncateText(item.name, 20) }}</h5>
+            <li class="list-group-item">Price: <strong>{{item.unitPrice | number :'.1'}} TL</strong>
+              <strong *ngIf="item.amount<=5"><br /><i class="fa-solid fa-circle-exclamation fa-beat"
+                  style="color: #d0a611;"></i> Last {{item.amount}} stock</strong>
+            </li>
+
+          </div>
+          <div class="card-body">
+            <!-- <a class="btn btn-light btn-sm card-link" (click)="viewProduct(item)">View</a> -->
+            <a class="btn btn-danger btn-sm card-link" *ngIf="item.amount<=0">No Stock</a>
+            <a class="btn btn-primary btn-sm card-link" (click)="addToCart(item)" *ngIf="item.amount>0">Add to Cart</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="card mb-2" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
+      <div class="card-header">
+        Order List
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let cartItem of cartItems">
+          <small><strong>{{cartItem.name}}</strong> <br /> Quantity: {{cartItem.quantity}} - Price:
+            {{cartItem.totalPrice}} TL</small>
+          <span class="badge bg-light text-dark mx-2">{{cartItem.quantity}}</span>
+          <i type="button" (click)="increaseQuantity(cartItem.id)" class="fa-solid fa-square-plus text-success"
+            style="margin-right: 1%;"></i>
+          <i type="button" (click)="decreaseQuantity(cartItem.id)" class="fa-solid fa-square-minus text-warning"
+            style="margin-right: 1%;"></i>
+          <i type="button" (click)="removeFromCart(cartItem.id)" class="fa-solid fa-trash text-danger"
+            style="margin-left: 1%;"></i>
+        </li>
+      </ul>
+      <div class="card-footer" *ngIf="cartItems.length>0 && isAuthenticated">
+        <button (click)="createOrder()" class="btn btn-primary btn-sm">{{getTotalPrice()| number:'.1'}} TL <i
+            class="fa-solid fa-right-long fa-beat" style="color: #ededed;margin-right: 5px;margin-left: 2px;"></i>
+          <strong>Complete Shopping</strong></button>
+      </div>
+      <div class="card-footer" *ngIf="cartItems.length>0 && !isAuthenticated">
+        <button routerLink="/login" class="btn btn-warning btn-sm">{{getTotalPrice()| number:'.1'}} TL <i
+            class="fa-solid fa-right-long fa-beat" style="color: #ededed;margin-right: 5px;margin-left: 2px;"></i>
+          <strong>You Should Login To Complete Shopping !</strong></button>
+      </div>
+      <div class="card-footer" *ngIf="cartItems.length<=0">
+        <div class="alert alert-primary" role="alert">
+          There are no products in your cart. Please add product
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="row" *ngIf="getAllProductModel.length<=0">
+  <div class="col-12">
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">No Product</h4>
+      <p>Contact website admin to add products.</p>
+    </div>
+  </div>
+</div>

@@ -11,13 +11,15 @@ import { OrderComponent } from './components/management/order/order.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { StandartGuard } from './core/guards/standart.guard';
 import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 // canActivate: [LoginGuard]
 const routes: Routes = [
   { path: '', component: MainDashboardComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'products', component: ProductsComponent},
+  { path: 'products', component: ProductsComponent },
+  { path: 'orders', component: OrdersComponent, canActivate: [StandartGuard] },
   { path: 'management', component: GeneralComponent, canActivate: [AdminGuard] },
   { path: 'user-management', component: UserComponent, canActivate: [AdminGuard] },
   { path: 'product-management', component: ProductComponent, canActivate: [AdminGuard] },
