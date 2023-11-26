@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 // import { ToastrService } from "ngx-toastr";
 
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    // private toastrService:ToastrService
+    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -44,29 +45,28 @@ export class RegisterComponent implements OnInit {
           this.isCompleted = true;
           this.registerForm.reset();
           this.isSuccessCompletedRegister = true;
-          // this.toastrService.success(
-          //   "Added successfully!",
-          //   "E-Commerce"
-          // ).onHidden.toPromise().then(() => {
-          // });
-          // this.getAllCustomers();
+          this.toastrService.success(
+            "Added successfully!",
+            "E-Commerce"
+          ).onHidden.toPromise().then(() => {
+          });
         })
         .catch((error) => {
           this.isCompleted = true;
-          // this.toastrService.error(
-          //   "Error",
-          //   "E-Commerce"
-          // )
+          this.toastrService.error(
+            "Error",
+            "E-Commerce"
+          )
         })
         .finally(() => {
 
         });
     } else {
       this.isCompleted = true;
-      // this.toastrService.error(
-      //   "",
-      //   ""
-      // );
+      this.toastrService.error(
+        "Try later",
+        "E-Commerce"
+      );
     }
   }
 

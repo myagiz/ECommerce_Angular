@@ -1,0 +1,209 @@
+<div class="row mb-2" *ngIf="createFormVisible">
+    <div class="col-lg-12">
+        <div class="card" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
+            <div class="card-body border border-dashed border-end-0 border-start-0" style="min-height: 230px;">
+                <div class="row">
+                    <div class="d-sm-flex">
+                        <div class="flex-grow-1">
+                            <div style="font-size: 12px" class="mb-4 mt-4"><strong>CREATE PRODUCT</strong></div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <!-- <span style="font-size: 12px" class="mb-4 mt-4 text-danger" onclick="history.back()"
+                                type="button"><i class="fa-solid fa-circle-xmark"></i>&nbsp;<strong>Close</strong>
+                            </span> -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <form [formGroup]="createProductFormGroup">
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="text" formControlName="name" class="form-control"
+                                            placeholder="Product Name">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="text" formControlName="categoryId" class="form-control"
+                                            placeholder="Category">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="number" formControlName="amount" class="form-control"
+                                            placeholder="Amount(Stock)">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="number" formControlName="unitPrice" class="form-control"
+                                            placeholder="Sale Price">
+                                    </div>
+                                </div>
+
+                                <div class="hstack gap-2 justify-content-end mt-2">
+                                    <button type="button" *ngIf="isCompleted==true" type="submit"
+                                        class="btn btn-success" id="add-btn" (click)="createProduct()"
+                                        [disabled]="!createProductFormGroup.valid">Add</button>
+                                    <button type="button" *ngIf="isCompleted==false" [disabled]="true"
+                                        class="btn btn-success btn-label right ms-auto nexttab nexttab  btn-load"
+                                        type="button">
+                                        <span class="d-flex align-items-center">
+                                            <span class="spinner-border flex-shrink-0" role="status">
+                                                <span class="visually-hidden">Please wait...</span>
+                                            </span>
+                                            <span class="flex-grow-1 ms-2">
+                                                Please wait...
+                                            </span>
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-danger" (click)="closeCreateForm()"
+                                        type="button">&nbsp;<strong>Close</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-2" *ngIf="updateFormVisible">
+    <div class="col-lg-12">
+        <div class="card" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
+            <div class="card-body border border-dashed border-end-0 border-start-0" style="min-height: 230px;">
+                <div class="row">
+                    <div class="d-sm-flex">
+                        <div class="flex-grow-1">
+                            <div style="font-size: 12px" class="mb-4 mt-4"><strong>UPDATE PRODUCT</strong></div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <!-- <span style="font-size: 12px" class="mb-4 mt-4 text-danger" onclick="history.back()"
+                                type="button"><i class="fa-solid fa-circle-xmark"></i>&nbsp;<strong>Close</strong>
+                            </span> -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <form [formGroup]="updateProductFormGroup">
+                            <div class="row">
+                                <input type="text" hidden="hidden" formControlName="id" class="form-control">
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="text" formControlName="name" class="form-control"
+                                            placeholder="Product Name">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="text" formControlName="categoryId" class="form-control"
+                                            placeholder="Category">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="number" formControlName="amount" class="form-control"
+                                            placeholder="Amount(Stock)">
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="col-12 mt-2">
+                                        <input type="number" formControlName="unitPrice" class="form-control"
+                                            placeholder="Sale Price">
+                                    </div>
+                                </div>
+
+                                <div class="hstack gap-2 justify-content-end mt-2">
+                                    <button type="button" *ngIf="isCompleted==true" type="submit"
+                                        class="btn btn-success" id="add-btn" (click)="updateProduct()"
+                                        [disabled]="!updateProductFormGroup.valid">Update</button>
+                                    <button type="button" *ngIf="isCompleted==false" [disabled]="true"
+                                        class="btn btn-success btn-label right ms-auto nexttab nexttab  btn-load"
+                                        type="button">
+                                        <span class="d-flex align-items-center">
+                                            <span class="spinner-border flex-shrink-0" role="status">
+                                                <span class="visually-hidden">Please wait...</span>
+                                            </span>
+                                            <span class="flex-grow-1 ms-2">
+                                                Please wait...
+                                            </span>
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-danger" (click)="closeUpdateForm()"
+                                        type="button">&nbsp;<strong>Close</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" [style]="{'box-shadow': '5px 4px 12px 0px #00000052'}">
+            <div class="card-body border border-dashed border-end-0 border-start-0" style="min-height: 230px;">
+                <div class="row">
+                    <div class="d-sm-flex">
+                        <div class="flex-grow-1">
+                            <div style="font-size: 12px" class="mb-4 mt-4"><strong>PRODUCT MANAGEMENT</strong></div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span style="font-size: 12px;margin-right: 10px;" class="mb-4 mt-4 btn btn-primary"
+                                (click)="this.openCreateForm()" type="button"><i
+                                    class="fa-solid fa-plus"></i>&nbsp;<strong>Create</strong>
+                            </span>
+                            <span style="font-size: 12px" class="mb-4 mt-4 text-info" onclick="history.back()"
+                                type="button"><i class="fa-solid fa-rotate-left"></i>&nbsp;<strong>Back</strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-4">
+                        <table id="productDataTable" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of getAllProductModel">
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.categoryName}}</td>
+                                    <td>{{item.unitPrice | number :'.1'}}</td>
+                                    <td>{{item.amount}}</td>
+                                    <td>
+                                        <span type="button" (click)="this.openUpdateForm(item.id)"
+                                            style="margin-right: 5px;"><i
+                                                class="fa-solid fa-pen-to-square text-success"></i></span>
+                                        <span type="button" (click)="this.deleteProduct(item.id)"><i
+                                                class="fa-solid fa-trash text-danger"></i></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
